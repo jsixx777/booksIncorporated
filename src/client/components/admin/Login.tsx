@@ -19,10 +19,10 @@ class Login extends React.Component<ILoginProps, ILoginState> {
     private alert: JSX.Element = null;
     private loggingIn: boolean = false;
 
-    componentDidMount(){
-        if(User && User.role === 'admin'){
+    componentDidMount() {
+        if (User && User.role === 'admin') {
             this.props.history.push('/admin');
-        }else{
+        } else {
 
         }
     }
@@ -32,31 +32,31 @@ class Login extends React.Component<ILoginProps, ILoginState> {
 
         this.setState({ loginStatus: false })
 
-        if(this.loggingIn) return;
+        if (this.loggingIn) return;
 
-        try{
+        try {
             this.loggingIn = true;
             let result = await json('auth/login', 'POST', {
                 email: this.state.email,
                 password: this.state.password
             });
 
-            if(result){
+            if (result) {
                 SetAccessToken(result.token, { userid: result.userid, role: result.role })
-                if(result.role === 'admin'){
+                if (result.role === 'admin') {
                     this.props.history.push('/admin');
-                }else{
+                } else {
                     this.props.history.push('/');
                 }
-            }else{
-                    this.setState({ loginStatus: true });
-                
+            } else {
+                this.setState({ loginStatus: true });
+
             }
-        }catch(e){
+        } catch (e) {
             console.log(e);
             this.setState({ loginStatus: true });
             throw e;
-        }finally{
+        } finally {
             this.loggingIn = false;
         }
 
@@ -65,9 +65,12 @@ class Login extends React.Component<ILoginProps, ILoginState> {
     }
 
     render() {
-        if(this.state.loginStatus){
+        if (this.state.loginStatus) {
             this.alert = <div className="alert-alert danger p-1 m-3" role='alert'>Invalid Credentials</div>
-        } 
+        }
+
+        
+       
         return (
             <main className="container">
                 <section className="row-my-3">
