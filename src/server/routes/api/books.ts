@@ -21,7 +21,7 @@ router.post('/', isAdmin, async (req:any, res) => {
 	}
 });
 
-router.get('/', async(req, res, next) =>{
+router.get('/', async (req, res, next) =>{
     
     try{
         let books = await DB.Books.getAll();
