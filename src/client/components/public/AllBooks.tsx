@@ -20,7 +20,7 @@ class AllBooks extends React.Component<AllBooksProps, AllBooksState> {
 
   async componentDidMount() {
     try {
-      let books: any = await json('api/books');
+      let books = await json('api/books');
       this.setState({ books });
     } catch (e) {
       console.log(e);

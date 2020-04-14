@@ -9,7 +9,7 @@ import { isGuest } from '../../middleware/auth-checkpoints';
 const router = express.Router();
 
 
-router.post('/', isAdmin, async (req:any, res) => {
+router.post('/', isAdmin, async (req, res) => {
 	console.log('Got to Node server', req.user);
 	const {title, firstName, lastName} = req.body;
 	try {
@@ -21,11 +21,11 @@ router.post('/', isAdmin, async (req:any, res) => {
 	}
 });
 
-router.get('/', async (req, res, next) =>{
-    console.log('did this hit?');
+router.get('/', async(req, res, next) =>{
+    
     try{
         let books = await DB.Books.getAll();
-        res.json(books);
+        res.send(books);
     }catch(e){
         console.log(e);
         res.sendStatus(500);  
@@ -33,7 +33,7 @@ router.get('/', async (req, res, next) =>{
     
 })
 
-router.get('/:id',   async(req:any, res, next) =>{
+router.get('/:id',   async(req, res, next) =>{
     let id = req.params.id;
     try{
         let book = await DB.Books.getSingleBook(id);

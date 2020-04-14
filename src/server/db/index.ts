@@ -6,7 +6,6 @@ import AccessTokens from './queries/accesstokens';
 import BookTags from './queries/booktags';
 
 
-
 export const pool = mysql.createPool(config.mysql);
 
 export const Query = <T = any>(query: string, values?: any[]) => {
