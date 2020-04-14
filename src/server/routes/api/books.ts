@@ -22,10 +22,10 @@ router.post('/', isAdmin, async (req:any, res) => {
 });
 
 router.get('/', async (req, res, next) =>{
-    
+    console.log('did this hit?');
     try{
         let books = await DB.Books.getAll();
-        res.send(books);
+        res.json(books);
     }catch(e){
         console.log(e);
         res.sendStatus(500);  
